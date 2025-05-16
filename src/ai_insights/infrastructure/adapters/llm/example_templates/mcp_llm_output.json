@@ -1,0 +1,25 @@
+{
+    "response_id": "llm_resp_abc789",
+    "recommendations": [
+      {
+        "characterName": "Piper",
+        "reasoning": "Given your strong performance with objective-focused play but noted weakness against long-range brawlers, Piper would be an excellent addition. She excels at controlling lanes from a distance and can counter many meta threats. Her Super also provides good escape or repositioning, which can complement an aggressive style if caught out.",
+        "synergy_suggestion": "Pairs well with your existing Shelly for map control, where Shelly handles close threats and Piper covers long sightlines.",
+        "meta_fit_score": 0.85 
+      },
+      {
+        "characterName": "Frank",
+        "reasoning": "Frank is a top-tier tank in the current meta, especially in Gem Grab and Brawl Ball, which you prefer. His ability to stun multiple enemies can turn the tide of a game and create openings for your aggressive pushes. He's straightforward to pick up but offers high impact.",
+        "synergy_suggestion": "Can create space for your Colt to deal damage freely.",
+        "meta_fit_score": 0.9
+      },
+      {
+        "characterName": "Sprout",
+        "reasoning": "To diversify your brawler pool with a strong area denial option, Sprout is ideal. His walls can protect objectives, block enemy paths, and synergize well with an aggressive team that pushes enemies into his attacks. This will help you control the map more effectively.",
+        "synergy_suggestion": "Excellent with objective holders, helps secure areas after your team makes a push.",
+        "meta_fit_score": 0.8
+      }
+    ],
+    "player_description_segment": "SuperBrawler99 is a formidable close-quarters combatant who thrives on objectives, often leading the charge. While a terror up close, strategic adaptation to ranged threats will elevate their game to legendary status.",
+    "confidence": 0.92
+  }

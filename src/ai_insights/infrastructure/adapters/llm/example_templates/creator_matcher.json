@@ -1,0 +1,22 @@
+{
+    "playerId": "playerX123",
+    "insightType": "creator_lookalike",
+    "generatedAt": "2025-05-16T14:35:00Z",
+    "matches": [
+      {
+        "creatorName": "FunTimesGaming",
+        "platform": "Twitch",
+        "matchReason": "Your aggressive playstyle and success with close-range brawlers strongly align with FunTimesGaming's entertaining and fast-paced content. You'll likely enjoy their high-energy streams and daring plays.",
+        "channelUrl": "url/to/funtimesgaming/twitch", 
+        "creatorIconUrl": "url/to/funtimes_icon.png"
+      },
+      {
+        "creatorName": "ProBrawlPlays",
+        "platform": "YouTube",
+        "matchReason": "To elevate your strategic understanding, especially in objective modes, ProBrawlPlays offers deep meta analysis and brawler guides that could help you refine your tactics and counter different matchups effectively.",
+        "channelUrl": "url/to/probrawlplays/youtube",
+        "creatorIconUrl": "url/to/probrawl_icon.png"
+      }
+    ],
+    "summaryMessage": "Check out these creators – their content might just match your style!"
+  }

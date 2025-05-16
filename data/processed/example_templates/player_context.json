@@ -1,0 +1,62 @@
+{
+    "playerId": "playerX123",
+    "playerProfile": {
+      "username": "SuperBrawler99",
+      "trophies": 25000,
+      "highestTrophies": 26500,
+      "xpLevel": 150,
+      "club": {
+        "id": "clubAlpha",
+        "name": "Alpha Wolves"
+      },
+      "mostUsedBrawlers": [
+        {"name": "Shelly", "level": 11, "winRate": 0.58, "trophies": 750},
+        {"name": "Colt", "level": 10, "winRate": 0.62, "trophies": 700},
+        {"name": "Nita", "level": 9, "winRate": 0.55, "trophies": 650}
+      ],
+      "playStyleTags": ["aggressive", "objective-focused"], 
+      "recentPerformanceSummary": "Consistent wins in Gem Grab with Shelly; struggles against long-range brawlers in Bounty.",
+      "preferredGameModes": ["Gem Grab", "Brawl Ball"]
+    },
+    "currentGameState": { 
+      "gameVersion": "v35.123",
+      "currentMeta": {
+        "summary": "Tank brawlers and those with area denial are currently strong. Mortis has seen a rise in Showdown.",
+        "dominantBrawlers": ["Frank", "Emz", "Buzz"],
+        "weakBrawlers": ["Dynamike", "Tick"], 
+        "popularCompositions": {
+          "Gem Grab": [["Poco", "Rosa", "Jacky"], ["Gene", "Max", "Sprout"]],
+          "Brawl Ball": [["Frank", "Bibi", "Sandy"]]
+        }
+      },
+      "activeEvents": ["Gem Grab Madness", "Robo Rumble Weekend"],
+      "characterData": [ 
+        {"name": "Shelly", "role": "Fighter", "rarity": "Common", "strengths": ["High burst damage close", "Area control super"], "weaknesses": ["Low range"]},
+        {"name": "Mortis", "role": "Assassin", "rarity": "Mythic", "strengths": ["High mobility", "Chain attacks"], "weaknesses": ["Low health", "High skill cap"]},
+        {"name": "Dynamike", "role": "Thrower", "rarity": "Super Rare", "strengths": ["Damage over walls"], "weaknesses": ["Vulnerable up close", "Hard to hit directs"]}
+      ]
+    },
+    "communitySentiment": {
+      "recentMentions": [
+        {"source": "Reddit", "topic": "Shelly Buff", "sentiment": "positive", "summary": "Players are finding the recent Shelly buff makes her more viable in higher trophy ranges."},
+        {"source": "YouTubeComment", "topic": "Mortis Guide", "sentiment": "neutral", "summary": "Discussion on advanced Mortis techniques for Showdown."}
+      ]
+    },
+    "creatorData": [
+      {
+        "creatorName": "ProBrawlPlays",
+        "platform": "YouTube",
+        "styleFocus": ["strategic", "control", "high-trophy gameplay"],
+        "mainBrawlers": ["Belle", "Byron", "Ruffs"],
+        "description": "Focuses on competitive strategies and meta analysis."
+      },
+      {
+        "creatorName": "FunTimesGaming",
+        "platform": "Twitch",
+        "styleFocus": ["aggressive", "entertainment", "off-meta picks"],
+        "mainBrawlers": ["Mortis", "Edgar", "Stu"],
+        "description": "Known for exciting gameplay and humorous commentary."
+      }
+    ],
+    "requestedInsightTypes": ["character_recommendation", "player_description"] 
+  }

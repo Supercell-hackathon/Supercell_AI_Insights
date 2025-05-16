@@ -1,0 +1,35 @@
+{
+    "playerId": "playerX123",
+    "insightType": "character_recommendation",
+    "generatedAt": "2025-05-16T14:35:00Z",
+    "recommendations": [
+      {
+        "characterName": "Piper",
+        "title": "The Sharpshooting Solution",
+        "description": "Counter long-range threats and control the map with Piper! Her precision shots and agile Super make her a great fit to cover your current lineup's weaknesses.",
+        "gameModes": ["Bounty", "Knockout", "Wipeout"],
+        "tips": ["Maintain distance to maximize damage.", "Use Super for escapes or aggressive repositioning."],
+        "brawlerIconUrl": "url/to/piper_icon.png", 
+        "unlockStatus": "Not Owned" 
+      },
+      {
+        "characterName": "Frank",
+        "title": "The Meta Tank",
+        "description": "Dominate objective modes with Frank! His massive health pool and game-changing Super fit the current meta perfectly and complement your aggressive style.",
+        "gameModes": ["Gem Grab", "Brawl Ball", "Hot Zone"],
+        "tips": ["Time your Super carefully as it can be interrupted.", "Use your range to hit multiple targets."],
+        "brawlerIconUrl": "url/to/frank_icon.png",
+        "unlockStatus": "Level 5"
+      },
+      {
+        "characterName": "Sprout",
+        "title": "The Master of Area Denial",
+        "description": "Control the battlefield with Sprout! His wall-creating Super and bouncing projectiles offer unique strategic advantages, especially for objective control.",
+        "gameModes": ["Gem Grab", "Hot Zone", "Siege"],
+        "tips": ["Use walls to funnel enemies or protect teammates.", "Master the bounce shots for tricky hits."],
+        "brawlerIconUrl": "url/to/sprout_icon.png",
+        "unlockStatus": "Not Owned"
+      }
+    ],
+    "summaryMessage": "These brawlers could help you conquer new challenges and master the meta!"
+  }

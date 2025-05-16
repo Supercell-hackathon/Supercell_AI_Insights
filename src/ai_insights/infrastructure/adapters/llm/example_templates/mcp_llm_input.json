@@ -1,0 +1,40 @@
+{
+    "meta": {
+      "timestamp": "2025-05-16T14:30:00Z",
+      "targetPlayerId": "playerX123",
+      "llmInstructions": "You are an expert Brawl Stars coach. Analyze the provided data to give personalized advice. Respond in JSON format."
+    },
+    "playerContext": {
+      "username": "SuperBrawler99",
+      "trophies": 25000,
+      "primaryBrawlers": [
+        {"name": "Shelly", "winRate": 0.58, "notes": "High usage, good win rate."},
+        {"name": "Colt", "winRate": 0.62, "notes": "Strong performance."}
+      ],
+      "identifiedPlayStyle": ["aggressive", "objective-focused"],
+      "performanceNotes": "Excels with Shelly in Gem Grab. Needs options for long-range encounters."
+    },
+    "gameContext": {
+      "currentMetaSummary": "Tanks and area denial are strong. Mortis popular in Showdown.",
+      "relevantBrawlersForPlayer": [ 
+        {"name": "Piper", "role": "Sharpshooter", "reasoning_hint": "Addresses long-range weakness."},
+        {"name": "Frank", "role": "Tank", "reasoning_hint": "Fits current tank meta, good for objective modes."},
+        {"name": "Sprout", "role": "Thrower", "reasoning_hint": "Strong area denial, complements aggressive play by controlling space."}
+      ]
+    },
+    "communityContext": [
+      {"topic": "Shelly", "summary": "Recent buff viewed positively, more viable.", "relevance_to_player": "Player uses Shelly often."},
+      {"topic": "Long-range counters", "summary": "Community discusses best brawlers to counter tanks like Piper or Belle.", "relevance_to_player": "Player struggles against long-range."}
+    ],
+    "creatorProfilesForMatching": [
+        { "name": "ProBrawlPlays", "style": ["strategic", "control"], "mains": ["Belle", "Byron"]},
+        { "name": "FunTimesGaming", "style": ["aggressive", "entertainment"], "mains": ["Mortis", "Edgar"]}
+    ],
+    "task": { 
+      "type": "character_recommendation", 
+      "parameters": {
+        "recommendation_count": 3,
+        "focus": "brawlers to counter long-range weakness and fit current meta"
+      }
+    }
+  }
