@@ -3,6 +3,8 @@ import os
 import json
 from typing import List
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+load_dotenv() 
 
 from dateutil import tz
 from googleapiclient.discovery import build
@@ -93,7 +95,9 @@ class JSONDataLoader(DataLoader):
 
 if __name__ == '__main__':
 
-    API_KEY  = 'AIzaSyDp9lF-YRQsJh2RQwN_yzOpEH3rMxq2duE'
+    API_KEY  = os.getenv('YOUTUBE_API_KEY')
+    if not API_KEY:
+        raise ValueError("API key is required. Set the YOUTUBE_API_KEY environment variable.")
     QUERY    = 'brawl stars meta'
     OUT_FILE = 'data/raw/weekly_videos.json'
 
