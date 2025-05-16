@@ -12,3 +12,9 @@ class DataLoader(ABC):
         Loads data from a source.
         """
         pass
+    @abstractmethod
+    def write(self, data):
+        """
+        Writes data to a destination.
+        """
+        pass
