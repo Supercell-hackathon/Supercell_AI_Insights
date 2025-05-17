@@ -4,6 +4,8 @@ from src.ai_insights.infrastructure.adapters.llm.api_service import ApiService
 
 if __name__ == "__main__":
     api = ApiService(game='brawl', user_id='%239JVU8RC')
-    api.get_ai_insights()
+    insights = api.get_ai_insights()
+
+    print(insights)
 
     
