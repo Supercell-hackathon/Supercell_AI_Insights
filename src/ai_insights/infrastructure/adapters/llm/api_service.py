@@ -1,28 +1,6 @@
-from context_handler import ContextHandler
-from prompt_generator import PromptGenerator
-from llm_connector import LLMConnector
-
-# |--- Calls ---> MCPHandler.structure_context_for_llm()
-# |                 (Input: aggregated_player_context, task_types)
-# |                 (Output: mcp_llm_input_data)
-# |
-# |--- Calls ---> PromptGenerator.generate_prompt_from_mcp()
-# |                 (Input: mcp_llm_input_data)
-# |                 (Output: llm_prompt_text)
-# |
-# |--- Calls ---> LLMConnector.send_prompt()
-# |                 (Input: llm_prompt_text)
-# |                 (Output: raw_llm_response_json_string)
-# |
-# |--- Calls ---> InsightGenerator.process_llm_output() (Orchestrator)
-#                   (Input: raw_llm_response_json_string, player_id, mcp_llm_input_data["tasks"])
-#                   |
-#                   |--- Calls (internally) ---> CharacterRecommender.format_recommendations() (if requested)
-#                   |--- Calls (internally) ---> PlayerDescriber.format_description() (if requested)
-#                   |--- Calls (internally) ---> CreatorMatcher.format_matches() (if requested)
-#                   |
-#                   (Output: final_player_insights dictionary)
-
+from src.ai_insights.infrastructure.adapters.llm.context_handler import ContextHandler
+from src.ai_insights.infrastructure.adapters.llm.prompt_generator import PromptGenerator
+from src.ai_insights.infrastructure.adapters.llm.llm_connector import LLMConnector
 
 class ApiService:
     def __init__(self, game=None, user_id=None, llm_provider = "google", model = None):
@@ -47,16 +25,9 @@ class ApiService:
         recommendations_prompt = prompt_generator.generate_prompt(requested_task='recommendations', context=context)
         context['recommendations'] = llm_connector.get_llm_response(recommendations_prompt)
 
+        ai_insights = {}
+        ai_insights['player_description'] = context['player_description']
+        ai_insights['performance_summary'] = context['performance_summary']
+        ai_insights['recommendations'] = context['recommendations']
 
-        print(context['player_description'])
-        print(context['performance_summary'])
-        print(context['recommendations'])
-
-        return 0
-
-
-if __name__ == "__main__":
-    api = ApiService(game='brawl', user_id='%239JVU8RC')
-    api.get_ai_insights()
-
-    
+        return ai_insights
