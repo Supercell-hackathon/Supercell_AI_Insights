@@ -90,21 +90,3 @@ class PromptGenerator:
 
         else:
             return 'Invalid task'
-        
-
-# # Example Usage
-# if __name__ == "__main__":
-#     generator = PromptGenerator()
-#     # Assume mcp_output from mcp_handler.py example is available
-#     sample_mcp_data = { # Simplified from mcp_output for brevity
-#         "meta": {"llmInstructions": "Be a Brawl Stars coach."},
-#         "playerContext": {"username": "TestPlayer", "trophies": 100},
-#         "gameContext": {"currentMetaSummary": "Aggro is in."},
-#         "tasks": [
-#             {"type": "character_recommendation", "parameters": {"recommendation_count": 1, "focus": "aggressive brawlers"}},
-#             {"type": "player_description", "parameters": {"tone": "heroic"}}
-#         ]
-#     }
-#     prompt = generator.generate_prompt_from_mcp(sample_mcp_data)
-#     print("\nGenerated Prompt:")
-#     print(prompt)
