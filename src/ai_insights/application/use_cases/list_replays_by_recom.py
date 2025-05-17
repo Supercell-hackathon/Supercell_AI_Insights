@@ -25,8 +25,11 @@ def list_replays_by_recom(
     replays repository. The relevant replays are those that match the character
     associated with the recommendation and the recommendation's description.
     """
-    api_response = game_api_client.get(request)
-    relevant_replays = replays_repo.get(filters=api_response)
+    api_response = game_api_client.get(request["endpoint"])
+    # extract information from the API response
+    relevant_data = game_api_client.retrieve_data(api_response, request["filters"])
+    relevant_replays = replays_repo.get(filters=relevant_data)
+
     # build replay DTOs
     replay_dtos = [
         ReplayDTO(
