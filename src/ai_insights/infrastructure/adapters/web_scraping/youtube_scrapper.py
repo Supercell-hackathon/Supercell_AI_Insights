@@ -59,7 +59,7 @@ class YouTubeFetcher(WebContentFetcher):
                 segs = YouTubeTranscriptApi.get_transcript(vid, languages=self.languages)
                 transcript = " ".join(s['text'] for s in segs)
             except (TranscriptsDisabled, NoTranscriptFound, ParseError):
-                transcript = ""
+                transcript = "No transcript available"
 
             resultados.append(
                 VideoTranscriptDto(
@@ -98,8 +98,8 @@ if __name__ == '__main__':
     API_KEY  = os.getenv('YOUTUBE_API_KEY')
     if not API_KEY:
         raise ValueError("API key is required. Set the YOUTUBE_API_KEY environment variable.")
-    QUERY    = 'brawl stars meta'
-    OUT_FILE = 'data/raw/weekly_videos.json'
+    QUERY    = 'clash royale meta'
+    OUT_FILE = 'data/raw/weekly_videos_royale.json'
 
 
     fetcher     = YouTubeFetcher(api_key=API_KEY, days=7, max_results=5)
