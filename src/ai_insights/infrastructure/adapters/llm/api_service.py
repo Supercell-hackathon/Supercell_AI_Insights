@@ -1,7 +1,6 @@
 from context_handler import ContextHandler
 from prompt_generator import PromptGenerator
 from llm_connector import LLMConnector
-from insight_generator import InsightGenerator
 
 # |--- Calls ---> MCPHandler.structure_context_for_llm()
 # |                 (Input: aggregated_player_context, task_types)
