@@ -38,7 +38,6 @@ class BrawlStarsClient(GameAPIClient):
         filtered_data = data.copy()
         if "items" in filters:
             filtered_data = data["items"]
-        print(filtered_data)
         if "tag" in filters:
             filtered_data = [player["tag"] for player in filtered_data]
         return {"ids": filtered_data}
