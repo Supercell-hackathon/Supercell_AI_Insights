@@ -4,3 +4,4 @@ scikit-learn
 sentence-transformers
 numpy
 faiss-cpu
+flask==3.0.2

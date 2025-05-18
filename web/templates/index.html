@@ -77,7 +77,10 @@
 
         <!-- AI Insights Display -->
         {% if data.ai_insights %}
-        <div class="row" id="insightsContainer">
+        <div class="row" id="insightsContainer" 
+             data-player-description="{{ data.ai_insights.player_description|tojson|safe }}"
+             data-performance-summary="{{ data.ai_insights.performance_summary|tojson|safe }}"
+             data-recommendations="{{ data.ai_insights.recommendations|tojson|safe }}">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">
@@ -138,21 +141,18 @@
         }
 
         function formatJsonContent() {
+            const container = document.getElementById('insightsContainer');
+            if (!container) return;
+
             const insights = {
-                playerDescription: {% if data.ai_insights %}{{ data.ai_insights.player_description|tojson|safe }}{% else %}null{% endif %},
-                performanceSummary: {% if data.ai_insights %}{{ data.ai_insights.performance_summary|tojson|safe }}{% else %}null{% endif %},
-                recommendations: {% if data.ai_insights %}{{ data.ai_insights.recommendations|tojson|safe }}{% else %}null{% endif %}
+                playerDescription: JSON.parse(container.dataset.playerDescription),
+                performanceSummary: JSON.parse(container.dataset.performanceSummary),
+                recommendations: JSON.parse(container.dataset.recommendations)
             };
 
-            if (insights.playerDescription) {
-                document.getElementById('playerDescription').innerHTML = syntaxHighlight(insights.playerDescription);
-            }
-            if (insights.performanceSummary) {
-                document.getElementById('performanceSummary').innerHTML = syntaxHighlight(insights.performanceSummary);
-            }
-            if (insights.recommendations) {
-                document.getElementById('recommendations').innerHTML = syntaxHighlight(insights.recommendations);
-            }
+            document.getElementById('playerDescription').innerHTML = syntaxHighlight(insights.playerDescription);
+            document.getElementById('performanceSummary').innerHTML = syntaxHighlight(insights.performanceSummary);
+            document.getElementById('recommendations').innerHTML = syntaxHighlight(insights.recommendations);
         }
 
         document.getElementById('insightsForm').addEventListener('submit', function(e) {
@@ -174,10 +174,10 @@
         });
 
         // Format JSON content when the page loads
-        
-        {% if data.ai_insights %}
-        document.addEventListener('DOMContentLoaded', formatJsonContent);
-        {% endif %}
+        const container = document.getElementById('insightsContainer');
+        if (container) {
+            document.addEventListener('DOMContentLoaded', formatJsonContent);
+        }
     </script>
 </body>
 </html> 
