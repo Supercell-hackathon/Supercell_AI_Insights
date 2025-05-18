@@ -27,9 +27,7 @@ class RAGRetriever:
         metadata_file = os.path.join(base_rag_index_path, f"vector_store_metadata_{game_suffix}.json")
 
         if os.path.exists(faiss_file) and os.path.exists(metadata_file):
-            print(f"RAGRetriever: Loading FAISS index from {faiss_file}")
             self.index = faiss.read_index(faiss_file)
-            print(f"RAGRetriever: Loading metadata from {metadata_file}")
             with open(metadata_file, 'r', encoding='utf-8') as f:
                 self.metadata_store = json.load(f)
             print(f"RAGRetriever for '{game_suffix}': Index ({self.index.ntotal} vectors) and metadata ({len(self.metadata_store)} items) loaded.")
@@ -46,9 +44,7 @@ class RAGRetriever:
                             self.total_indexed_characters += len(json.dumps(original_item_content))
                         except TypeError: # Fallback if not directly serializable
                             self.total_indexed_characters += len(str(original_item_content))
-                
-                print(f"RAGRetriever for '{game_suffix}': Index ({self.index.ntotal} vectors) and metadata ({len(self.metadata_store)} items) loaded.")
-                print(f"RAGRetriever: Approx. total characters in indexed corpus for '{game_suffix}': {self.total_indexed_characters:,}")
+            
             else:
                 print(f"RAGRetriever Warning: Index or metadata loaded but one might be empty for '{game_suffix}'.")
 
