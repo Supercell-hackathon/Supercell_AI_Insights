@@ -41,6 +41,13 @@ The project is built around several key components to achieve its goals:
 * **Data Storage:** Utilizing Document DBs for scraped game data and community sentiment, and Vector DBs for embeddings. 
 * **Python:** The core programming language for all project components.
 
+# Demo
+Basic website showing all AI generated data! 🤖
+
+https://github.com/user-attachments/assets/e88bff51-1d57-4a94-97d3-020afbc3d676
+
+
+
 ## Project Structure Overview
 
 The project's codebase is organized to reflect its architecture:
