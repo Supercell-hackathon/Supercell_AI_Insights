@@ -83,9 +83,8 @@ def analyze_clip() -> bool:
 if __name__ == "__main__":
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-    #embed_data()
+    embed_data()
     analyze_clip()
-    #run_analysis()
-    #get_insights()
-    
+    run_analysis()
+    get_insights()
    
