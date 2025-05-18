@@ -1,0 +1,8 @@
+# Context for Brawler: Nita
+# This is an auto-generated sample. Please edit with specific details for 'nita'.
+
+Game Mode Hint: [e.g., Gem Grab, Brawl Ball, Showdown]
+Focus on: [e.g., Nita's Super usage, defensive plays with Gadgets, interesting combos]
+Brawlers of Interest (besides Nita): [e.g., Mortis, Crow, or specific counters/synergies if relevant to the clip type]
+Desired Tone: [e.g., Exciting, Analytical, Humorous, Tactical]
+Other specific instructions: [e.g., 'note any misplays', 'highlight teamwork if visible']

@@ -35,7 +35,9 @@ def semantic_search(
     relevant_replays = [
         replay
         for replay in replays
-        if cosine_similarity(recommendation.embedding.vector, replay.embedding.vector)
+        if cosine_similarity(
+            recommendation.embedding.vector, replay.embedding.vector.reshape(1, -1)
+        )
         > treshold
     ]
 

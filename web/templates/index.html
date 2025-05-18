@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .loading-spinner {
+            width: 3rem;
+            height: 3rem;
+        }
+        .json-content {
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid #dee2e6;
+        }
+        .json-key {
+            color: #0d6efd;
+        }
+        .json-string {
+            color: #198754;
+        }
+        .json-number {
+            color: #dc3545;
+        }
+        .json-boolean {
+            color: #fd7e14;
+        }
+        .json-null {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-border loading-spinner text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">{{ data.title }}</h1>
+        
+        <!-- User ID Input Form -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <form method="POST" class="card" id="insightsForm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">Enter User ID:</label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">#</span>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="user_id"
+                                  name="user_id"
+                                  value="{{ data.user_id if data.user_id else '' }}"
+                                  required
+                                >
+                              </div>
+<!-- 
+                            <input type="text" class="form-control" id="user_id" name="user_id" 
+                                   value="{{ data.user_id if data.user_id else '' }}" required> -->
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitButton">Generate Insights</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- AI Insights Display -->
+        {% if data.ai_insights %}
+        <div class="row" id="insightsContainer">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Player Description</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="json-content" id="playerDescription"></div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Performance Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="json-content" id="performanceSummary"></div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Recommendations</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="json-content" id="recommendations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        function syntaxHighlight(json) {
+            if (typeof json !== 'string') {
+                json = JSON.stringify(json, null, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function formatJsonContent() {
+            const insights = {
+                playerDescription: {% if data.ai_insights %}{{ data.ai_insights.player_description|tojson|safe }}{% else %}null{% endif %},
+                performanceSummary: {% if data.ai_insights %}{{ data.ai_insights.performance_summary|tojson|safe }}{% else %}null{% endif %},
+                recommendations: {% if data.ai_insights %}{{ data.ai_insights.recommendations|tojson|safe }}{% else %}null{% endif %}
+            };
+
+            if (insights.playerDescription) {
+                document.getElementById('playerDescription').innerHTML = syntaxHighlight(insights.playerDescription);
+            }
+            if (insights.performanceSummary) {
+                document.getElementById('performanceSummary').innerHTML = syntaxHighlight(insights.performanceSummary);
+            }
+            if (insights.recommendations) {
+                document.getElementById('recommendations').innerHTML = syntaxHighlight(insights.recommendations);
+            }
+        }
+
+        document.getElementById('insightsForm').addEventListener('submit', function(e) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const submitButton = document.getElementById('submitButton');
+            const insightsContainer = document.getElementById('insightsContainer');
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...';
+            
+            // Hide previous insights if they exist
+            if (insightsContainer) {
+                insightsContainer.style.display = 'none';
+            }
+        });
+
+        // Format JSON content when the page loads
+        
+        {% if data.ai_insights %}
+        document.addEventListener('DOMContentLoaded', formatJsonContent);
+        {% endif %}
+    </script>
+</body>
+</html> 

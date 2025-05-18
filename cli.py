@@ -4,6 +4,7 @@ import subprocess
 import sys
 from src.ai_insights.infrastructure.adapters.llm.api_service import ApiService
 load_dotenv()
+from src.ai_insights.infrastructure.adapters.llm.clip_context_generator import brawler_clip_analysis
 
 # Remember to set brawl api token
 def run_analysis() -> None:
@@ -52,11 +53,38 @@ def embed_data() -> None:
                 print(f'Error executing {mod} (exit code {resultado.returncode})')
         print('Database embedding completed.')
 
+def analyze_clip() -> bool:
+    
+    """
+    Prompts the user to run video clip analysis for a specific Brawler.
+    Returns True if analysis was attempted, False otherwise.
+    """
+    did_run_analysis = False
+    respuesta = input('Do you want to run a video clip analysis for a specific Brawler? (yes/no): ')
+    if respuesta.strip().lower() in ('si', 'yes', 's', 'y'):
+        brawler_name_input = input("Enter the Brawler's name for the video clip analysis (e.g., hank, piper): ")
+        if brawler_name_input.strip():
+            print(f"CLI: Triggering video clip analysis for Brawler: {brawler_name_input.strip()}")
+            try:
+                brawler_clip_analysis(brawler_name=brawler_name_input.strip())
+                did_run_analysis = True 
+            except NameError: 
+                print("CLI Error: 'brawler_clip_analysis' function is not available (import failed).")
+            except Exception as e:
+                print(f"CLI Error: An unexpected error occurred during video clip analysis for '{brawler_name_input.strip()}': {e}")
+        else:
+            print("No Brawler name provided. Video clip analysis skipped.")
+    else:
+        print("Video clip analysis skipped by user.")
+    return did_run_analysis
+
+
 if __name__ == "__main__":
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
     get_insights()
     
     embed_data()
-
+ analyze_clip()
     run_analysis()
     
