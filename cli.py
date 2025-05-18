@@ -1,5 +1,4 @@
-#from src.ai_insights.infrastructure.adapters.llm.api_service import ApiService
-import os
+import json
 from dotenv import load_dotenv
 import subprocess
 import sys
@@ -55,8 +54,9 @@ def embed_data() -> None:
 
 if __name__ == "__main__":
 
-    embed_data()
-   
-    run_analysis()
     get_insights()
-   
+    
+    embed_data()
+
+    run_analysis()
+    

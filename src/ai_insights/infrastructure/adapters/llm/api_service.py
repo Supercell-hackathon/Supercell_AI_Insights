@@ -10,24 +10,33 @@ class ApiService:
         self.model = model
     
     def get_ai_insights(self):
-        handler = ContextHandler(game=self.game, user_id=self.user_id)
-        context = handler.context_for_llm()
+        handler = ContextHandler(game=self.game, user_id=self.user_id, rag_enabled=True)
+        tasks = ["character_recommendation", "player_description", "creator_lookalike"]
+        llm_ready_context = handler.context_for_llm(task_types=tasks)
+
+        print("\n--- Final Context for LLM ---")
+        if llm_ready_context:
+            # print(f"\nContext generated. RAG Active reported: {llm_ready_context.get('meta', {}).get('rag_active')}")
+            print(f"Number of community items in context: {len(llm_ready_context.get('communityContext', []))}")
+            print(f"Number of characters in context: {len(llm_ready_context.get('gameContext', {}).get('characterData', []))}")
+        else:
+            print("Failed to generate context.")
 
         llm_connector = LLMConnector()
 
         prompt_generator = PromptGenerator()
-        player_description_prompt = prompt_generator.generate_prompt(requested_task='player_description', context=context)
-        context['player_description'] = llm_connector.get_llm_response(player_description_prompt)
+        player_description_prompt = prompt_generator.generate_prompt(requested_task='player_description', context=llm_ready_context)
+        llm_ready_context['player_description'] = llm_connector.get_llm_response(player_description_prompt)
 
-        performance_summary_prompt = prompt_generator.generate_prompt(requested_task='performance_summary', context=context)
-        context['performance_summary'] = llm_connector.get_llm_response(performance_summary_prompt)
+        performance_summary_prompt = prompt_generator.generate_prompt(requested_task='performance_summary', context=llm_ready_context)
+        llm_ready_context['performance_summary'] = llm_connector.get_llm_response(performance_summary_prompt)
  
-        recommendations_prompt = prompt_generator.generate_prompt(requested_task='recommendations', context=context)
-        context['recommendations'] = llm_connector.get_llm_response(recommendations_prompt)
+        recommendations_prompt = prompt_generator.generate_prompt(requested_task='recommendations', context=llm_ready_context)
+        llm_ready_context['recommendations'] = llm_connector.get_llm_response(recommendations_prompt)
 
         ai_insights = {}
-        ai_insights['player_description'] = context['player_description']
-        ai_insights['performance_summary'] = context['performance_summary']
-        ai_insights['recommendations'] = context['recommendations']
+        ai_insights['player_description'] = llm_ready_context['player_description']
+        ai_insights['performance_summary'] = llm_ready_context['performance_summary']
+        ai_insights['recommendations'] = llm_ready_context['recommendations']
 
         return ai_insights
