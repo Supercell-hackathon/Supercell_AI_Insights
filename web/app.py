@@ -19,7 +19,7 @@ def index():
     if request.method == 'POST':
         user_id = request.form.get('user_id')
         if user_id:
-            api_service = ApiService(game = 'brawl', user_id=user_id, model = "gemini-1.5-flash")
+            api_service = ApiService(game = 'brawl', user_id='%23' + user_id, model = "gemini-1.5-flash")
             ai_insights = api_service.get_ai_insights()
     
     data = {
