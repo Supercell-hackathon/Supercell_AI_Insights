@@ -11,7 +11,7 @@ from googleapiclient.discovery import build
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 from xml.etree.ElementTree import ParseError
 
-from src.ai_insights.application.dtos.video_transcrpt import VideoTranscriptDto
+from src.ai_insights.application.dtos.video_transcript import VideoTranscriptDto
 from src.ai_insights.application.ports.web_content_fetcher import WebContentFetcher
 from src.ai_insights.application.ports.data_loader import DataLoader
 from src.ai_insights.application.use_cases.web_scraper import WebScraper
@@ -23,7 +23,7 @@ class YouTubeFetcher(WebContentFetcher):
     def __init__(self,
                  api_key: str,
                  days: int = 7,
-                 max_results: int = 5,
+                 max_results: int = 20,
                  languages: List[str] = ['es', 'en']):
         self.youtube = build('youtube', 'v3', developerKey=api_key)
         self.days = days
@@ -44,7 +44,7 @@ class YouTubeFetcher(WebContentFetcher):
                             type='video',
                             order='relevance',
                             publishedAfter=self._published_after(),
-                            maxResults=self.max_results
+                            maxResults=20
                         )
                         .execute()
         )
@@ -60,15 +60,17 @@ class YouTubeFetcher(WebContentFetcher):
                 transcript = " ".join(s['text'] for s in segs)
             except (TranscriptsDisabled, NoTranscriptFound, ParseError):
                 transcript = "No transcript available"
-
-            resultados.append(
-                VideoTranscriptDto(
-                    id=vid,
-                    title=title,
-                    creator=creator,
-                    transcript=transcript
+            if(len(transcript) < 150):
+                continue
+            else:
+                resultados.append(
+                    VideoTranscriptDto(
+                        id=vid,
+                        title=title,
+                        creator=creator,
+                        transcript=transcript
+                    )
                 )
-            )
 
         return resultados
 
@@ -98,8 +100,8 @@ if __name__ == '__main__':
     API_KEY  = os.getenv('YOUTUBE_API_KEY')
     if not API_KEY:
         raise ValueError("API key is required. Set the YOUTUBE_API_KEY environment variable.")
-    QUERY    = 'clash royale meta'
-    OUT_FILE = 'data/raw/weekly_videos_royale.json'
+    QUERY    = 'brawl stars meta'
+    OUT_FILE = os.path.join(os.path.dirname(__file__), '../../../../../data/raw/weekly_videos_brawl_stars.json')
 
 
     fetcher     = YouTubeFetcher(api_key=API_KEY, days=7, max_results=5)

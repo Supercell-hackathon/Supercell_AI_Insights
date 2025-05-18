@@ -76,7 +76,7 @@ class JSONDataWriter:
 
 # --- Main ---
 if __name__ == '__main__':
-    OUT = os.path.join(os.path.dirname(__file__), '../../../data/raw/brawlhub_minimal.json')
+    OUT = os.path.join(os.path.dirname(__file__), '../../../../../data/raw/brawlhub_minimal.json')
     fetcher = BrawlHubFetcher()
     writer = JSONDataWriter(output_path=OUT)
     data = fetcher.fetch_all_minimal()

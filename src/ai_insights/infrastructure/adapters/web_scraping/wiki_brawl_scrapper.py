@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 
 BASE_URL = "http://brawlstars.fandom.com"
 CATEGORY_PAGE = "/wiki/Category:Brawlers"
-OUTPUT_DIR = "/Users/danielmunoz/Desktop/Supercell_AI_Insights/data/raw"
+OUTPUT_DIR =  os.path.join(os.path.dirname(__file__), '../../../../../data/raw/')
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "brawlers_details.json")
 
 def scrape_brawler_links():
@@ -77,4 +77,4 @@ if __name__ == "__main__":
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(all_data, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ Guardado {len(all_data)} brawlers en {OUTPUT_FILE}")
+    print(f"Saved {len(all_data)} brawlers to {OUTPUT_FILE}")
