@@ -59,6 +59,9 @@ The project's codebase is organized to reflect its architecture:
     * `infrastructure/adapters/web_scraping/`: Modules for data collection (YouTube, Wikis, etc.). 
     * (Other directories like `application`, `domain` define business logic and data structures).
 
+## Scaled project architecture
+<img width="1180" alt="Screenshot 2025-05-18 at 2 37 30 a m" src="https://github.com/user-attachments/assets/8159d6de-89fa-4d08-9a30-cc4beac2553d" />
+
 ## Target Users
 
 * **Average Player:** To receive daily, bite-sized insights tailored to their playstyle, helping them discover new builds, tricks, and trends without extensive research. 
